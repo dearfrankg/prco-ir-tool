@@ -1,8 +1,11 @@
 {
-  "name": "fg-typescript-starter",
+  "name": "prco-ir-tool",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
+  "bin": {
+    "prco-ir-tool": "./src/bin/prco-ir-tool.js"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "ts-node ./src/index.ts",
