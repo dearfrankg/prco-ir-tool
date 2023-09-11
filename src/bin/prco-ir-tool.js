@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 
 import { getOptions } from '../utils';
+import { process } from '../modules';
 
 const prcoIRTool = async () => {
   Promise.resolve()

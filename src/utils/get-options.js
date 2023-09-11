@@ -48,17 +48,17 @@ function collectMinimistOptions() {
   }
 
   const isCreateOperation = options.operation === 'create';
-  const hasInspectionIds = options._.length > 0;
+  const hasInspectionItems = options._.length > 0;
   let result;
 
   if (isCreateOperation) {
-    prepCreateOperation({ hasInspectionIds, options });
+    prepCreateOperation({ hasInspectionItems, options });
     result = schema.CreateOptionsSchema.safeParse(options);
   } else {
     prepNonCreateOperation({ options });
     result = schema.BaseOptionsSchema.safeParse({
       ...options,
-      inspectionIds: options._,
+      inspectionItems: options._,
     });
   }
 
@@ -71,8 +71,8 @@ function collectMinimistOptions() {
   }
 }
 
-function prepCreateOperation({ hasInspectionIds, options }) {
-  if (hasInspectionIds) {
+function prepCreateOperation({ hasInspectionItems, options }) {
+  if (hasInspectionItems) {
     throw new Error('create operation should not have inspection ids');
   }
 

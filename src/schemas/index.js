@@ -22,7 +22,7 @@ const regexp = {
     12345,/
     12345,/a/b
   */
-  inspectionId: /^\d+(?:,\/(?:([a-z]+\/)+[a-z]+)?)?$/,
+  inspectionItems: /^\d+(?:,\/(?:([a-z]+\/)+[a-z]+)?)?$/,
 };
 
 export const BaseOptionsSchema = z.object({
@@ -30,10 +30,10 @@ export const BaseOptionsSchema = z.object({
   operation: z.enum(['check-status', 'cancel', 'create']),
   vendor: z.enum(['wis', 'oneguard', 'verity']),
   environment: z.enum(['test', 'production']),
-  inspectionIds: z.array(z.string().regex(regexp.inspectionId, { message: 'invalid inspection id' })),
+  inspectionItems: z.array(z.string().regex(regexp.inspectionItems, { message: 'invalid inspection item' })),
 });
 
-export const CreateOptionsSchema = BaseOptionsSchema.omit({ inspectionIds: true }).merge(
+export const CreateOptionsSchema = BaseOptionsSchema.omit({ inspectionItems: true }).merge(
   z.object({ json: z.string(), jsonObj: z.any().optional() }),
 );
 
