@@ -12,11 +12,10 @@
     "test": "jest",
     "test:dev": "jest --watchAll",
     "lint": "eslint .",
-    "lint-and-fix": "eslint . --fix",
-    "prepare": "husky install",
+    "lint-fix": "eslint . --fix",
+    "pretty-fix": "prettier . --write --ignore-unknown",
     "lint-staged": "lint-staged",
-    "eslint:fix": "eslint --quiet --fix",
-    "prettier:fix": "prettier --write --ignore-unknown"
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
