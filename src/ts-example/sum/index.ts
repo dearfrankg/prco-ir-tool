@@ -1,1 +1,1 @@
-export * from "./sum.ts";
+export * from "./sum";
