@@ -4,6 +4,7 @@ import parseArgs from 'minimist';
 import * as schema from '../schemas';
 import { usage, isUnique, hasExistingPath, hasExistingFolder } from '../utils';
 import { config } from 'dotenv';
+import { templateSchemas } from '../schemas';
 
 const vendors = getVendorsEnvResources();
 
@@ -76,11 +77,32 @@ function prepCreateOperation({ hasInspectionItems, options }) {
     throw new Error('create operation should not have inspection ids');
   }
 
-  // throw on invalid json
   try {
     options.jsonObj = JSON.parse(options.json ?? '');
   } catch (e) {
-    throw new Error('Invalid JSON option');
+    throw new Error('Error parsing JSON');
+  }
+
+  let CreateSchema;
+
+  switch (options.vendor) {
+    case 'verity':
+      CreateSchema = templateSchemas[options.vendor].create.omit({ api_key: true });
+      break;
+
+    case 'oneguard':
+      CreateSchema = templateSchemas[options.vendor].create.omit({ UserName: true, Password: true });
+      break;
+
+    case 'wis':
+      CreateSchema = templateSchemas[options.vendor].create.omit({ Username: true, Password: true });
+      break;
+  }
+
+  const result = CreateSchema.safeParse(options.jsonObj);
+  if (!result.success) {
+    console.log(JSON.stringify(result));
+    throw new Error('Error matching schema');
   }
 }
 
@@ -208,7 +230,7 @@ function getVendorsEnvResources() {
 
         // derive username, password from wis_credentials
         const [wis_username, wis_password] = options.wis_credentials
-          .toString() //
+          // .toString() //
           .split(',');
         if (!wis_username || !wis_password) {
           throw new Error('Invalid formatting of wis credentials');
@@ -243,7 +265,7 @@ function getVendorsEnvResources() {
 
         // derive username, password from oneguard_credentials
         const [oneguard_username, oneguard_password] = options.oneguard_credentials
-          .toString() //
+          // .toString() //
           .split(',');
         if (!oneguard_username || !oneguard_password) {
           throw new Error('Invalid formatting of oneguard credentials');
@@ -293,9 +315,9 @@ function getVendorsEnvResources() {
 
         // derive url
         const suffix = {
-          create: 'create-inspection',
-          ['check-status']: 'check-inspection',
-          cancel: 'cancel-inspection',
+          create: '/create-inspection',
+          ['check-status']: '/check-inspection',
+          cancel: '/cancel-inspection',
         };
         const isProduction = options.environment === 'production';
         const url = isProduction
