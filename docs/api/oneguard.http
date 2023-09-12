@@ -1,0 +1,234 @@
+###############################################################
+#
+# ONEGUARD NOTES
+#
+# - credentials are the same for prod and test
+# - manually check the success field for success or fail
+#
+# URLS
+# PROD: https://oneguardinspections.com/webService/status/api
+# TEST: https://test.oneguardinspections.com/webService/status/api
+#
+# SAMPLE RECORDS
+# PRODUCTION: 477644 477456 477240
+# TEST: 428526 427778 427152
+
+
+###############################################################
+#
+# CREATE INSPECTION REQUEST
+#
+# SUCCESS
+#
+# - success when SendInspectionRequestTPAResult is integer
+# - example success -- <SendInspectionRequestTPAResult>432435</SendInspectionRequestTPAResult>
+# - example fail -- <SendInspectionRequestTPAResult>-3</SendInspectionRequestTPAResult>
+#
+# NOTES
+#
+# - inspection reason can be in any of two formats
+#
+# format1:
+#           <InspectionReason>some reason</InspectionReason>
+#
+# format2:
+#           <InspectionReason>
+#               <item>none</item>
+#               <item>none</item>
+#               <item>none</item>
+#           </InspectionReason>
+#
+###
+POST {{$dotenv oneguard_test_url}}/api HTTP/1.1
+content-type: text/xml; charset=utf-8
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ns1="https://oneguardinspections.com/webService/api">
+    <SOAP-ENV:Header>
+        <ns1:AuthenticateHeader>
+            <UserName>prco</UserName>
+            <Password>prco4567</Password>
+        </ns1:AuthenticateHeader>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <SOAP-ENV:SendInspectionRequestTPA>
+            <RequesterName>BamaRama</RequesterName>
+            <RequesterExt>9809879879</RequesterExt>
+            <RequesterEmail>sample@test.com</RequesterEmail>
+            <ContractHolder>Someone</ContractHolder>
+            <SaleDate>2012-12-16T12:46:30</SaleDate>
+            <SaleOdometer>696969</SaleOdometer>
+            <VehicleYear>2007</VehicleYear>
+            <VehicleMake>Ford</VehicleMake>
+            <VehicleModel>FiveHundred</VehicleModel>
+            <Mileage>696969</Mileage>
+            <VIN>123456ABCD78910</VIN>
+            <ContractNumber>contract123</ContractNumber>
+            <ClaimNumber>claim123</ClaimNumber>
+            <InspectionType>Automotive</InspectionType>
+            <InspectionReason>
+                <item>none</item>
+                <item>none</item>
+                <item>none</item>
+            </InspectionReason>
+            <RepairSite>BTTHL surfers</RepairSite>
+            <Address1>some street</Address1>
+            <Address2>some place</Address2>
+            <City>Lubbock</City>
+            <State>TX</State>
+            <Zip>79415</Zip>
+            <Phone>8182989730</Phone>
+            <Contact>cool</Contact>
+            <TpaCode>PRCO</TpaCode>
+        </SOAP-ENV:SendInspectionRequestTPA>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+# SAMPLE RESPONSE
+#
+# <?xml version="1.0" encoding="UTF-8"?>
+# <SOAP-ENV:Envelope
+#   xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+#   <SOAP-ENV:Body>
+#     <SendInspectionRequestTPAResponse
+#       xmlns="http://InspectionService/">
+#       <SendInspectionRequestTPAResult>432439</SendInspectionRequestTPAResult>
+#     </SendInspectionRequestTPAResponse>
+#   </SOAP-ENV:Body>
+# </SOAP-ENV:Envelope>
+
+
+###############################################################
+#
+# CHECK STATUS
+#
+###
+POST {{$dotenv oneguard_test_url}}/status/api HTTP/1.1
+content-type: text/xml; charset=utf-8
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ns1="https://oneguardinspections.com/webService/status/api">
+    <SOAP-ENV:Header>
+        <ns1:AuthenticateHeader>
+            <Username>prco</Username>
+            <Password>prco4567</Password>
+        </ns1:AuthenticateHeader>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <SOAP-ENV:GetRequest>
+            <request_id>477456</request_id>
+            <tpa_code>PRCO</tpa_code>
+        </SOAP-ENV:GetRequest>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+# SAMPLE RESPONSE
+#
+# <?xml version="1.0" encoding="UTF-8"?>
+# <SOAP-ENV:Envelope
+#   xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+#   xmlns:ns1="http://InspectionService/"
+#   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+#   <SOAP-ENV:Body>
+#     <ns1:GetRequestResponse>
+#       <RequestResponseResult>
+#         <request_id>477456</request_id>
+#         <success>true</success>
+#         <status>closed</status>
+#         <state>7</state>
+#         <est_completion_date>2022-12-13</est_completion_date>
+#         <message>Inspection Request Complete</message>
+#         <report>https://oneguardinspections.com/index.php?option=com_rstickets&amp;user=prco&amp;passw=c5086ed4e25bab12a4e53afc0d4b6c15:fBos6sHOqF5EkoqvUutv4NuW2p8wzWbe&amp;page=ticket&amp;id=477456</report>
+#         <report_pdf>https://oneguardinspections.com/components/com_rstickets/files/2022/12/12/PRCO864/PRCO-0000000864_PDF_Report.pdf</report_pdf>
+#         <guest_report>https://oneguardinspections.com/guest-report/req/bTFvcU1qVGR1ajUxODNTOElYSURKMjZCMFgvQ1lhU1Z0RzQ2UThhMUhYbz0=</guest_report>
+#         <custom_field_values/>
+#       </RequestResponseResult>
+#     </ns1:GetRequestResponse>
+#   </SOAP-ENV:Body>
+# </SOAP-ENV:Envelope>
+
+
+
+###############################################################
+#
+# CANCEL INSPECTION REQUEST
+#
+# NOTES
+#
+# - request ids can be in any of two formats
+#
+# format1:
+#           <request_id>432436</request_id>
+#
+# format2:
+#           <request_ids>
+#               <item>432436</item>
+#               <item>432437</item>
+#           </request_ids>
+#
+###
+POST {{$dotenv oneguard_test_url}}/cancel/api HTTP/1.1
+content-type: text/xml; charset=utf-8
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ns1="https://test.oneguardinspections.com/webService/cancel/api">
+    <SOAP-ENV:Header>
+        <ns1:AuthenticateHeader>
+            <Username>prco</Username>
+            <Password>prco4567</Password>
+        </ns1:AuthenticateHeader>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <SOAP-ENV:CancelRequest>
+            <request_id>432443</request_id>
+            <tpa_code>PRCO</tpa_code>
+        </SOAP-ENV:CancelRequest>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+# SAMPLE RESPONSES
+#
+# SUCCESS
+#
+# <?xml version="1.0" encoding="UTF-8"?>
+# <SOAP-ENV:Envelope
+#   xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+#   xmlns:ns1="http://InspectionService/">
+#   <SOAP-ENV:Body>
+#     <ns1:CancelRequestResponse>
+#       <RequestResponseResult>
+#         <request_id>432438</request_id>
+#         <success>true</success>
+#         <message>Request ID 432438 Cancelled</message>
+#       </RequestResponseResult>
+#     </ns1:CancelRequestResponse>
+#   </SOAP-ENV:Body>
+# </SOAP-ENV:Envelope>
+#
+#
+# ALREADY CANCELLED
+#
+# <?xml version="1.0" encoding="UTF-8"?>
+# <SOAP-ENV:Envelope
+#   xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+#   xmlns:ns1="http://InspectionService/">
+#   <SOAP-ENV:Body>
+#     <ns1:CancelRequestResponse>
+#       <RequestResponseResult>
+#         <request_id>432438</request_id>
+#         <success>false</success>
+#         <message>Request ID 432438 was previously Cancelled</message>
+#       </RequestResponseResult>
+#     </ns1:CancelRequestResponse>
+#   </SOAP-ENV:Body>
+# </SOAP-ENV:Envelope>

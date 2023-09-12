@@ -1,0 +1,74 @@
+###############################################################
+#
+# VERITY API
+#
+###############################################################
+
+###############################################################
+### CREATE INSPECTION REQUEST
+POST {{$dotenv verity_test_url}}/submit-inspection HTTP/1.1
+content-type: application/json
+
+{
+  "api_key": "{{$dotenv verity_api_key}}",
+  "reference_number": "12345",
+  "sale_date": "02/27/2019",
+  "vehicle_year": "2018",
+  "vehicle_make": "Toyota",
+  "vehicle_model": "Corolla",
+  "vehicle_mileage": "12000",
+  "vin": "2FTJF35M7KCA14635",
+  "contract_no": "111111111",
+  "insp_reason": "Testing",
+  "repair_site": "Test",
+  "contact_name": "Test Test",
+  "contact_phone": "2222222222",
+  "req_name": "Testing Test",
+  "req_ext": "2122",
+  "req_email": "test@test.com",
+  "contract_holder": "Testing Test",
+  "failures": [
+    { "cause": "Test1", "complaint": "Test1", "correction": "Test1" },
+    { "cause": "Test2", "complaint": "Test2", "correction": "Test2" }
+  ]
+}
+
+
+
+###############################################################
+### CHECK INSPECTION
+
+POST {{$dotenv verity_test_url}}/check-inspection HTTP/1.1
+content-type: application/json
+
+{
+  "api_key": "{{$dotenv verity_api_key}}",
+  "inspection_id": 172798
+}
+
+# RESPONSE
+#
+# {
+#   inspection_id: 172798,
+#   status: "Not Dispatched",
+#   detail_url: "https://dev.verityinspections.com/detail/172798"
+#   images_url: "https://dev.verityinspections.com/images/172798"
+#   report_url: "https://dev.verityinspections.com/pdf-report/172798"
+# }
+
+
+
+
+###############################################################
+### CANCEL INSPECTION REQUEST
+#
+# TRY 172931 172933
+#
+
+POST {{$dotenv verity_test_url}}/cancel-inspection HTTP/1.1
+content-type: application/json
+
+{
+  "api_key": "{{$dotenv verity_api_key}}",
+  "inspection_id": 172896
+}

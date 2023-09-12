@@ -1,0 +1,70 @@
+REQUEST / TICKET CREATION
+
+ENDPOINT: https://oneguardinspections.com/webService/api
+
+REQUEST XML:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+	xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:ns1="https://oneguardinspections.com/webService/api">
+	<SOAP-ENV:Header>
+		<ns1:AuthenticateHeader>
+			<UserName>admin</UserName>
+			<Password>ck11kc</Password>
+		</ns1:AuthenticateHeader>
+	</SOAP-ENV:Header>
+	<SOAP-ENV:Body>
+		<SOAP-ENV:SendInspectionRequestTPA>
+			<RequesterName>Bama Janolo</RequesterName>
+			<RequesterExt></RequesterExt>
+			<RequesterEmail></RequesterEmail>
+			<ContractHolder></ContractHolder>
+			<SaleDate>2023-04-14T00:00:00</SaleDate>
+			<SaleOdometer></SaleOdometer>
+			<VehicleYear>2007</VehicleYear>
+			<VehicleMake>Ford</VehicleMake>
+			<VehicleModel>FiveHundred</VehicleModel>
+			<Mileage>69000</Mileage>
+			<VIN></VIN>
+			<ContractNumber>contract123</ContractNumber>
+			<ClaimNumber>claim123</ClaimNumber>
+			<InspectionType>Automotive</InspectionType>
+			<InspectionReason>
+				<item>none</item>
+				<item>none</item>
+				<item>none</item>
+			</InspectionReason>
+			<RepairSite>rfpoc</RepairSite>
+			<Address1></Address1>
+			<Address2></Address2>
+			<City></City>
+			<State></State>
+			<Zip></Zip>
+			<Phone></Phone>
+			<Contact>contract123</Contact>
+			<TpaCode>NSPCTR</TpaCode>
+		</SOAP-ENV:SendInspectionRequestTPA>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+RESPONSE XML ( if SendInspectionRequestTPAResult does not return a TicketId integer, then it was unsuccessful ):
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+	xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+	<SOAP-ENV:Body>
+		<SendInspectionRequestTPAResponse
+			xmlns="http://InspectionService/">
+			<SendInspectionRequestTPAResult>552169</SendInspectionRequestTPAResult>
+		</SendInspectionRequestTPAResponse>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+curl --location --request POST 'https://test.oneguardinspections.com/webService/api' --header 'Content-Type: application/xml' --header 'Cookie: 9cfd37e88c8d70ebd37fd33e533d2fbb=f5q37hj19jcu5d2iqv6i5cbjb4' --data-raw '<?xml version="1.0" encoding="UTF-8"?><SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://test.oneguardinspections.com/webService/api"><SOAP-ENV:Header><ns1:AuthenticateHeader><UserName>backlotcars</UserName><Password>backlotcars4567</Password></ns1:AuthenticateHeader></SOAP-ENV:Header><SOAP-ENV:Body><SOAP-ENV:SendInspectionRequestTPA><RequesterName>BamaRama</RequesterName><RequesterExt>9809879879</RequesterExt><RequesterEmail>sample@test.com</RequesterEmail><ContractHolder>Someone</ContractHolder><SaleDate>2012-12-16T12:46:30</SaleDate><SaleOdometer>696969</SaleOdometer><VehicleYear>2007</VehicleYear><VehicleMake>Ford</VehicleMake><VehicleModel>FiveHundred</VehicleModel><Mileage>696969</Mileage><VIN>123456ABCD78910</VIN><ContractNumber>contract123</ContractNumber><ClaimNumber>claim123</ClaimNumber><InspectionType>Automotive</InspectionType><InspectionReason>mean machine mean machine thunder kiss</InspectionReason><RepairSite>BTTHL surfers</RepairSite><Address1>some street</Address1><Address2>some place</Address2><City>Lubbock</City><State>TX</State><Zip>79415</Zip><Phone>8182989730</Phone><Contact>cool</Contact><TpaCode>BLC</TpaCode></SOAP-ENV:SendInspectionRequestTPA></SOAP-ENV:Body></SOAP-ENV:Envelope>'

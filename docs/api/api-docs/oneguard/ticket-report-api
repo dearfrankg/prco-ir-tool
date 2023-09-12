@@ -1,0 +1,547 @@
+CANCEL TICKET(S)
+
+ENDPOINT: https://oneguardinspections.com/webService/reportdata/api
+
+REQUEST XML:
+	- request_id > single request, single ticket/request id 
+	- you can query multiple ticket ids
+	- Username & Password is of the owner of the form , the client
+	- tpa_code is to identify what form the ticket belongs to
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+	xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:ns1="https://oneguardinspections.com/webService/reportdata/api">
+	<SOAP-ENV:Header>
+		<ns1:AuthenticateHeader>
+			<Username>admin</Username>
+			<Password>ck11kc</Password>
+		</ns1:AuthenticateHeader>
+	</SOAP-ENV:Header>
+	<SOAP-ENV:Body>
+		<SOAP-ENV:GetReportData>
+			<request_id>432301</request_id>
+			<tpa_code>AUTO</tpa_code>
+		</SOAP-ENV:GetReportData>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+
+
+RESPONSE XML:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+	xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:ns1="http://InspectionService/"
+	xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/">
+	<SOAP-ENV:Body>
+		<ns1:GetReportDataResponse>
+			<ReportDataResponseResult>
+				<request_id>432301</request_id>
+				<success>true</success>
+				<message/>
+				<reportdata>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>469</CustomFieldId>
+						<CustomFieldName></CustomFieldName>
+						<CustomFieldLabel></CustomFieldLabel>
+						<SortId>0</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>470</CustomFieldId>
+						<CustomFieldName></CustomFieldName>
+						<CustomFieldLabel></CustomFieldLabel>
+						<SortId>0</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>471</CustomFieldId>
+						<CustomFieldName></CustomFieldName>
+						<CustomFieldLabel></CustomFieldLabel>
+						<SortId>0</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>400</CustomFieldId>
+						<CustomFieldName>Corporate040211_AdjusterName</CustomFieldName>
+						<CustomFieldLabel>Adjuster&amp;#039;s Name</CustomFieldLabel>
+						<SortId>1</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>401</CustomFieldId>
+						<CustomFieldName>Corporate040211_REQUESTER-NUMBER</CustomFieldName>
+						<CustomFieldLabel>Requester&amp;#039;s contact phone number</CustomFieldLabel>
+						<SortId>2</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>402</CustomFieldId>
+						<CustomFieldName>Corporate040211_REQUESTER_EMAIL</CustomFieldName>
+						<CustomFieldLabel>Requester&amp;#039;s email address</CustomFieldLabel>
+						<SortId>3</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>403</CustomFieldId>
+						<CustomFieldName>Corporate040211_REQUESTER_FAX</CustomFieldName>
+						<CustomFieldLabel>Requester&amp;#039;s fax number</CustomFieldLabel>
+						<SortId>4</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>404</CustomFieldId>
+						<CustomFieldName>Corporate040211_WARRANTY_CONTRACT</CustomFieldName>
+						<CustomFieldLabel>Warranty contract number</CustomFieldLabel>
+						<SortId>6</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>405</CustomFieldId>
+						<CustomFieldName>Corporate040211_CORPORATENEW_WARRANTY_Autho</CustomFieldName>
+						<CustomFieldLabel>Claim/Authorization number</CustomFieldLabel>
+						<SortId>7</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>406</CustomFieldId>
+						<CustomFieldName>Corporate040211_CORPORATENEW_WARRANTY_MILEAGE</CustomFieldName>
+						<CustomFieldLabel>Warranty contract start date/start mileage</CustomFieldLabel>
+						<SortId>8</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>407</CustomFieldId>
+						<CustomFieldName>Corporate040211_CORPORATENEW_REPAIR_ORDER</CustomFieldName>
+						<CustomFieldLabel>Repair order number(If applicable)</CustomFieldLabel>
+						<SortId>9</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>408</CustomFieldId>
+						<CustomFieldName>Corporate040211_REPAIR_DATE</CustomFieldName>
+						<CustomFieldLabel>Repair order start date</CustomFieldLabel>
+						<SortId>10</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>409</CustomFieldId>
+						<CustomFieldName>Corporate040211_WARRANTY_CLAIM</CustomFieldName>
+						<CustomFieldLabel>Warranty claim number</CustomFieldLabel>
+						<SortId>20</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>410</CustomFieldId>
+						<CustomFieldName>Corporate040211_Client</CustomFieldName>
+						<CustomFieldLabel>Client&amp;#039;s Name</CustomFieldLabel>
+						<SortId>30</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>414</CustomFieldId>
+						<CustomFieldName>Corporate040211_VIN</CustomFieldName>
+						<CustomFieldLabel>Vehicle&amp;#039;s VIN #</CustomFieldLabel>
+						<SortId>40</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>411</CustomFieldId>
+						<CustomFieldName>Corporate040211_Vehicle_Year</CustomFieldName>
+						<CustomFieldLabel>Vehicle Year</CustomFieldLabel>
+						<SortId>50</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>412</CustomFieldId>
+						<CustomFieldName>Corporate040211_Vehicle_make</CustomFieldName>
+						<CustomFieldLabel>Vehicle Make</CustomFieldLabel>
+						<SortId>60</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>413</CustomFieldId>
+						<CustomFieldName>Corporate040211_Vehicle_model</CustomFieldName>
+						<CustomFieldLabel>Vehicle Model</CustomFieldLabel>
+						<SortId>70</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>415</CustomFieldId>
+						<CustomFieldName>Corporate040211_Mileage</CustomFieldName>
+						<CustomFieldLabel>Vehicle&amp;#039;s mileage</CustomFieldLabel>
+						<SortId>80</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>416</CustomFieldId>
+						<CustomFieldName>Corporate040211_RF_number</CustomFieldName>
+						<CustomFieldLabel>Repair facility contact phone number</CustomFieldLabel>
+						<SortId>90</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>417</CustomFieldId>
+						<CustomFieldName>Corporate040211_Repair_name</CustomFieldName>
+						<CustomFieldLabel>Repair Facility&amp;#039;s name</CustomFieldLabel>
+						<SortId>100</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>418</CustomFieldId>
+						<CustomFieldName>Corporate040211_RF_Address</CustomFieldName>
+						<CustomFieldLabel>Repair Facility&amp;#039;s Address/City/State</CustomFieldLabel>
+						<SortId>110</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>19647</CustomFieldId>
+						<CustomFieldName>Automobile_RFzipcode</CustomFieldName>
+						<CustomFieldLabel>Repair Facility Zip Code</CustomFieldLabel>
+						<SortId>115</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>419</CustomFieldId>
+						<CustomFieldName>Corporate040211_RF_contact </CustomFieldName>
+						<CustomFieldLabel>Repair facility contact</CustomFieldLabel>
+						<SortId>307</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>420</CustomFieldId>
+						<CustomFieldName>Corporate040211_RF_diagnosis</CustomFieldName>
+						<CustomFieldLabel>Problem as Described by repair facility</CustomFieldLabel>
+						<SortId>308</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>421</CustomFieldId>
+						<CustomFieldName>Corporate040211_Additional_Info</CustomFieldName>
+						<CustomFieldLabel>Additional Information Requested</CustomFieldLabel>
+						<SortId>309</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>422</CustomFieldId>
+						<CustomFieldName>Corporate040211_Details</CustomFieldName>
+						<CustomFieldLabel>Details</CustomFieldLabel>
+						<SortId>310</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>423</CustomFieldId>
+						<CustomFieldName>Corporate040211_RF_COF</CustomFieldName>
+						<CustomFieldLabel>Repair Facility&amp;#039;s Cause of Failure</CustomFieldLabel>
+						<SortId>311</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>424</CustomFieldId>
+						<CustomFieldName>Corporate040211_INSPECTOR&amp;#039;S</CustomFieldName>
+						<CustomFieldLabel>Inspectors Report</CustomFieldLabel>
+						<SortId>312</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>425</CustomFieldId>
+						<CustomFieldName>Corporate040211_Date</CustomFieldName>
+						<CustomFieldLabel>Date of Inspection</CustomFieldLabel>
+						<SortId>313</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>426</CustomFieldId>
+						<CustomFieldName>Corporate040211_Verified_Mileage</CustomFieldName>
+						<CustomFieldLabel>Verified vehicle mileage</CustomFieldLabel>
+						<SortId>314</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>427</CustomFieldId>
+						<CustomFieldName>Corporate040211_Verified_Vin</CustomFieldName>
+						<CustomFieldLabel>Verified VIN</CustomFieldLabel>
+						<SortId>315</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>428</CustomFieldId>
+						<CustomFieldName>Corporate040211_Verified_Make</CustomFieldName>
+						<CustomFieldLabel>Verified Year/Make/Model</CustomFieldLabel>
+						<SortId>316</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>429</CustomFieldId>
+						<CustomFieldName>Corporate040211_doors</CustomFieldName>
+						<CustomFieldLabel>Number of doors</CustomFieldLabel>
+						<SortId>317</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>430</CustomFieldId>
+						<CustomFieldName>Corporate040211_Model</CustomFieldName>
+						<CustomFieldLabel>Model Type</CustomFieldLabel>
+						<SortId>318</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>431</CustomFieldId>
+						<CustomFieldName>Corporate040211_Engine_size</CustomFieldName>
+						<CustomFieldLabel>Engine Size</CustomFieldLabel>
+						<SortId>319</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>432</CustomFieldId>
+						<CustomFieldName>Corporate040211_Number_cams</CustomFieldName>
+						<CustomFieldLabel>Number of cams</CustomFieldLabel>
+						<SortId>320</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>433</CustomFieldId>
+						<CustomFieldName>Corporate040211_Overhead</CustomFieldName>
+						<CustomFieldLabel>Overhead or pushrod?</CustomFieldLabel>
+						<SortId>321</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>434</CustomFieldId>
+						<CustomFieldName>Corporate040211_Valves</CustomFieldName>
+						<CustomFieldLabel>Number of valves</CustomFieldLabel>
+						<SortId>322</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>435</CustomFieldId>
+						<CustomFieldName>Corporate040211_Engine_Type</CustomFieldName>
+						<CustomFieldLabel>Engine Type</CustomFieldLabel>
+						<SortId>323</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>436</CustomFieldId>
+						<CustomFieldName>Corporate040211_Cylinders</CustomFieldName>
+						<CustomFieldLabel>Number of Cylinders</CustomFieldLabel>
+						<SortId>324</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>437</CustomFieldId>
+						<CustomFieldName>Corporate040211_Transmission_code</CustomFieldName>
+						<CustomFieldLabel>Transmission Code Number</CustomFieldLabel>
+						<SortId>325</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>438</CustomFieldId>
+						<CustomFieldName>Corporate040211_AM</CustomFieldName>
+						<CustomFieldLabel>Automatic or Manual?</CustomFieldLabel>
+						<SortId>326</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>439</CustomFieldId>
+						<CustomFieldName>Corporate040211_Drive_type</CustomFieldName>
+						<CustomFieldLabel>Drive Type</CustomFieldLabel>
+						<SortId>327</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>440</CustomFieldId>
+						<CustomFieldName>Corporate040211_Condition</CustomFieldName>
+						<CustomFieldLabel>Vehicle&amp;#039;s condition</CustomFieldLabel>
+						<SortId>328</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>441</CustomFieldId>
+						<CustomFieldName>Corporate040211_Tire_size</CustomFieldName>
+						<CustomFieldLabel>OEM Tire size</CustomFieldLabel>
+						<SortId>330</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>442</CustomFieldId>
+						<CustomFieldName>Corporate040211_Tire_tread</CustomFieldName>
+						<CustomFieldLabel>Actual Tire size and tread</CustomFieldLabel>
+						<SortId>331</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>443</CustomFieldId>
+						<CustomFieldName>Corporate040211_Abuse</CustomFieldName>
+						<CustomFieldLabel>Signs of Abuse?</CustomFieldLabel>
+						<SortId>332</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>444</CustomFieldId>
+						<CustomFieldName>Corporate040211_Collision</CustomFieldName>
+						<CustomFieldLabel>Signs of Collision?</CustomFieldLabel>
+						<SortId>333</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>445</CustomFieldId>
+						<CustomFieldName>Corporate040211_Modifications</CustomFieldName>
+						<CustomFieldLabel>Signs of Modifications?</CustomFieldLabel>
+						<SortId>334</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>446</CustomFieldId>
+						<CustomFieldName>Corporate040211_Commercial</CustomFieldName>
+						<CustomFieldLabel>Signs of Commercial use?</CustomFieldLabel>
+						<SortId>335</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>447</CustomFieldId>
+						<CustomFieldName>Corporate040211_Oil</CustomFieldName>
+						<CustomFieldLabel>Oil level</CustomFieldLabel>
+						<SortId>336</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>448</CustomFieldId>
+						<CustomFieldName>Corporate040211_Oil_condition</CustomFieldName>
+						<CustomFieldLabel>Oil condition</CustomFieldLabel>
+						<SortId>337</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>449</CustomFieldId>
+						<CustomFieldName>Corporate040211_Intermix</CustomFieldName>
+						<CustomFieldLabel>Evidence of Intermix?</CustomFieldLabel>
+						<SortId>338</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>450</CustomFieldId>
+						<CustomFieldName>Corporate040211_Oil_leaks</CustomFieldName>
+						<CustomFieldLabel>Engine Oil Leaks?</CustomFieldLabel>
+						<SortId>339</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>451</CustomFieldId>
+						<CustomFieldName>Corporate040211_Belts</CustomFieldName>
+						<CustomFieldLabel>Condition of belts and hoses</CustomFieldLabel>
+						<SortId>340</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>452</CustomFieldId>
+						<CustomFieldName>Corporate040211_Radiator</CustomFieldName>
+						<CustomFieldLabel>Condition of radiator</CustomFieldLabel>
+						<SortId>341</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>453</CustomFieldId>
+						<CustomFieldName>Corporate040211_Reservoir</CustomFieldName>
+						<CustomFieldLabel>Condition of Reservoir</CustomFieldLabel>
+						<SortId>342</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>454</CustomFieldId>
+						<CustomFieldName>Corporate040211_Rust</CustomFieldName>
+						<CustomFieldLabel>Evidence of Rust?</CustomFieldLabel>
+						<SortId>343</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>455</CustomFieldId>
+						<CustomFieldName>Corporate040211_Radiator_leak</CustomFieldName>
+						<CustomFieldLabel>Leaks in Radiator?</CustomFieldLabel>
+						<SortId>344</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>456</CustomFieldId>
+						<CustomFieldName>Corporate040211_Coolant_level</CustomFieldName>
+						<CustomFieldLabel>Level of Coolant?</CustomFieldLabel>
+						<SortId>345</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>457</CustomFieldId>
+						<CustomFieldName>Corporate040211_Coolant_condition</CustomFieldName>
+						<CustomFieldLabel>Condition of Coolant?</CustomFieldLabel>
+						<SortId>346</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>458</CustomFieldId>
+						<CustomFieldName>Corporate040211_Freeze_plug</CustomFieldName>
+						<CustomFieldLabel>Condition of freeze plug?</CustomFieldLabel>
+						<SortId>348</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>459</CustomFieldId>
+						<CustomFieldName>Corporate040211_Overheat</CustomFieldName>
+						<CustomFieldLabel>Evidence of overheat?</CustomFieldLabel>
+						<SortId>349</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>460</CustomFieldId>
+						<CustomFieldName>Corporate040211_Discoloration</CustomFieldName>
+						<CustomFieldLabel>Evidence of Discoloration?</CustomFieldLabel>
+						<SortId>350</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>461</CustomFieldId>
+						<CustomFieldName>Corporate040211_Transmission_fluid</CustomFieldName>
+						<CustomFieldLabel>Level of transmission fluid?</CustomFieldLabel>
+						<SortId>351</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>462</CustomFieldId>
+						<CustomFieldName>Corporate040211_Transmission_condition</CustomFieldName>
+						<CustomFieldLabel>Condition of transmission fluid?</CustomFieldLabel>
+						<SortId>352</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>463</CustomFieldId>
+						<CustomFieldName>Corporate040211_Metal</CustomFieldName>
+						<CustomFieldLabel>Evidence of Metal?</CustomFieldLabel>
+						<SortId>353</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>464</CustomFieldId>
+						<CustomFieldName>Corporate040211_Transmission_intermix</CustomFieldName>
+						<CustomFieldLabel>Evidence of intermix?</CustomFieldLabel>
+						<SortId>354</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>465</CustomFieldId>
+						<CustomFieldName>Corporate040211_Transmission_leaks</CustomFieldName>
+						<CustomFieldLabel>Leaks in Transmission?</CustomFieldLabel>
+						<SortId>355</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>466</CustomFieldId>
+						<CustomFieldName>Corporate040211_Drive_axle</CustomFieldName>
+						<CustomFieldLabel>Drive Axle Fluid level</CustomFieldLabel>
+						<SortId>356</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>467</CustomFieldId>
+						<CustomFieldName>Corporate040211_Drive_axle_condition</CustomFieldName>
+						<CustomFieldLabel>Condition of Drive Axle fluid?</CustomFieldLabel>
+						<SortId>357</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>468</CustomFieldId>
+						<CustomFieldName>Corporate040211_State</CustomFieldName>
+						<CustomFieldLabel>State of Assembly?</CustomFieldLabel>
+						<SortId>361</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>472</CustomFieldId>
+						<CustomFieldName>Corporate040211_Operator</CustomFieldName>
+						<CustomFieldLabel>Did the operator protect?</CustomFieldLabel>
+						<SortId>365</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>473</CustomFieldId>
+						<CustomFieldName>Corporate040211_Addition_info_inspector</CustomFieldName>
+						<CustomFieldLabel>Additional information about inspection</CustomFieldLabel>
+						<SortId>366</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>474</CustomFieldId>
+						<CustomFieldName>Corporate040211_EOD</CustomFieldName>
+						<CustomFieldLabel>Extent of Damage</CustomFieldLabel>
+						<SortId>367</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>475</CustomFieldId>
+						<CustomFieldName>Corporate040211_COF</CustomFieldName>
+						<CustomFieldLabel>Inspector&amp;#039;s cause of failure</CustomFieldLabel>
+						<SortId>368</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>476</CustomFieldId>
+						<CustomFieldName>InspectorRecommendedRepair</CustomFieldName>
+						<CustomFieldLabel>Inspector&amp;#039;s recommended repair</CustomFieldLabel>
+						<SortId>369</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>477</CustomFieldId>
+						<CustomFieldName>Corporate040211_Labor</CustomFieldName>
+						<CustomFieldLabel>Repair facility&amp;#039;s labor rate</CustomFieldLabel>
+						<SortId>370</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>478</CustomFieldId>
+						<CustomFieldName>Corporate040211_Labor_posted</CustomFieldName>
+						<CustomFieldLabel>Labor rate, posted or verbal?</CustomFieldLabel>
+						<SortId>371</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>17638</CustomFieldId>
+						<CustomFieldName>Automobile_Repairtype</CustomFieldName>
+						<CustomFieldLabel>Repair/Replacement Type</CustomFieldLabel>
+						<SortId>375</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>17639</CustomFieldId>
+						<CustomFieldName>Automobile_Partnumber</CustomFieldName>
+						<CustomFieldLabel>OEM Part Number</CustomFieldLabel>
+						<SortId>380</SortId>
+					</SOAP-ENC:Struct>
+					<SOAP-ENC:Struct>
+						<CustomFieldId>17640</CustomFieldId>
+						<CustomFieldName>Automobile_Repaircost</CustomFieldName>
+						<CustomFieldLabel>Total Repair/Replacement Estimate</CustomFieldLabel>
+						<SortId>385</SortId>
+					</SOAP-ENC:Struct>
+				</reportdata>
+			</ReportDataResponseResult>
+		</ns1:GetReportDataResponse>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

@@ -1,0 +1,134 @@
+
+
+### CREATE-IR
+# create inspection request
+POST https://www.stage.wisinspections.com/wiswebservice.asmx?WSDL HTTP/1.1
+content-type: text/xml; charset=utf-8;
+
+<soap:Envelope
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <AuthenticateHeader xmlns="http://www.wisinspections.com/">
+      <Username>2008prco</Username>
+      <Password>ocrp</Password>
+    </AuthenticateHeader>
+  </soap:Header>
+  <soap:Body>
+    <SendRequestB xmlns="http://www.wisinspections.com/">
+      <RequesterName>Test</RequesterName>
+      <RequesterExt>555</RequesterExt>
+      <RequesterEmail>test@test.com</RequesterEmail>
+      <ContractHolder>test</ContractHolder>
+      <ContractSale>2018-11-05</ContractSale>
+      <ContractMileage>55555</ContractMileage>
+      <VehicleYear>18</VehicleYear>
+      <VehicleMake>Hyundai</VehicleMake>
+      <VehicleModel>Elantra</VehicleModel>
+      <Mileage>55555</Mileage>
+      <VinNo>thisisafakeorderr</VinNo>
+      <ContractNo>5555</ContractNo>
+      <AuthorizationNo>5555</AuthorizationNo>
+      <InspectionType>Automotive</InspectionType>
+      <InspectionReason>
+        <anyType xsi:type="xsd:string">this is a test concern</anyType>
+        <anyType xsi:type="xsd:string">test two</anyType>
+      </InspectionReason>
+      <RepairSite>test facility</RepairSite>
+      <Address1>9011 Arboretum Pkwy</Address1>
+      <Address2>na</Address2>
+      <City>North Chesterfield</City>
+      <State>VA</State>
+      <Zip>23235</Zip>
+      <Phone>555-555-5555</Phone>
+      <Contact>testing</Contact>
+    </SendRequestB>
+  </soap:Body></soap:Envelope>
+
+# RESPONSE
+
+# <soap:Body>
+#   <SendRequestBResponse
+#     xmlns="http://www.wisinspections.com/">
+#     <SendRequestBResult xsi:type="xsd:int">1035877</SendRequestBResult>
+#   </SendRequestBResponse>
+# </soap:Body>
+
+
+
+
+### CHECK-STATUS-IR
+# check status on inspection request
+
+POST https://www.stage.wisinspections.com/wiswebservice.asmx?WSDL HTTP/1.1
+content-type: text/xml; charset=utf-8
+
+<soap:Envelope
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <AuthenticateHeader xmlns="http://www.wisinspections.com/">
+      <Username>2008prco</Username>
+      <Password>ocrp</Password>
+    </AuthenticateHeader>
+  </soap:Header>
+  <soap:Body>
+    <CheckStatus xmlns="http://www.wisinspections.com/">
+      <RequestID>1035877</RequestID>
+    </CheckStatus>
+  </soap:Body>
+</soap:Envelope>
+
+
+# RESPONSE
+
+# when id found
+#
+# <diffgr:diffgram
+#   xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+#   xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+#   <NewDataSet
+#     xmlns="">
+#     <tblInspectionRequest diffgr:id="tblInspectionRequest1" msdata:rowOrder="0">
+#       <RequestID>999132</RequestID>
+#       <Details>http://www.wisinspections.com/Customer/InspectionDetails.aspx?requestID=QRPhbSFdcws%%</Details>
+#       <Images>http://www.wisinspections.com/Customer/InspectionPictures.aspx?requestID=QRPhbSFdcws%%</Images>
+#       <Report>http://www.wisinspections.com/Customer/InspectionReport.aspx?requestID=QRPhbSFdcws%%</Report>
+#     </tblInspectionRequest>
+#   </NewDataSet>
+# </diffgr:diffgram>
+
+# when id not found
+#
+# <diffgr:diffgram
+#   xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+#   xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram />
+
+
+### CANCEL-IR
+# cancel inspection request
+# they prefer you reach out to them instead of api
+
+
+### TRY
+POST https://www.stage.wisinspections.com/wiswebservice.asmx?WSDL HTTP/1.1
+content-type: text/xml; charset=utf-8
+
+<soap:Envelope
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <AuthenticateHeader xmlns="http://www.wisinspections.com/">
+      <Username>2008prco</Username>
+      <Password>ocrp</Password>
+    </AuthenticateHeader>
+  </soap:Header>
+  <soap:Body>
+    <CheckStatus xmlns="http://www.wisinspections.com/">
+      <RequestID>1048435</RequestID>
+    </CheckStatus>
+  </soap:Body>
+</soap:Envelope>
