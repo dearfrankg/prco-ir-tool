@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { XMLParser } from 'fast-xml-parser';
 import { get } from 'lodash-es';
-import { vendors } from '../utils';
+import { templates } from '../templates';
 
 const HTTP_CODE_OK = 200;
 const HTTP_CODE_NOT_FOUND = 404;
@@ -15,14 +15,30 @@ export const cancelIR = (props) => {
 async function callCancelApi(props) {
   const { prco, inspectionId } = props;
   const vendor = prco.options.vendor;
-  const body = vendors[vendor].getBody(prco, inspectionId).trim();
+
+  let data;
+  switch (vendor) {
+    case 'verity':
+      data = { api_key: prco.options.api_key, inspection_id: inspectionId };
+      break;
+
+    case 'oneguard':
+      data = { Username: prco.options.username, Password: prco.options.password, request_id: inspectionId };
+      break;
+
+    case 'wis':
+      data = { Username: prco.options.username, Password: prco.options.password, RequestID: inspectionId };
+      break;
+  }
+
+  const { contentType, body } = templates[vendor].cancel(data);
 
   const axiosOptions = {
     method: 'POST',
     url: prco.options.url,
     data: body,
     headers: {
-      ['Content-Type']: vendors[vendor].contentType,
+      ['Content-Type']: contentType,
     },
   };
 

@@ -41,8 +41,9 @@ export const downloadFile = (reportUrl, reportPath) => {
   })
     .then((response) => {
       response.data.pipe(fs.createWriteStream(reportPath));
+      return true;
     })
-    .catch((e) => {
-      console.log('error', e);
+    .catch(() => {
+      return false;
     });
 };

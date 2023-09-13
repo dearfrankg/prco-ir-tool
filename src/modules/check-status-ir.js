@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { XMLParser } from 'fast-xml-parser';
 import { get } from 'lodash-es';
-import { createFolder, downloadFile, hasExistingFolder, hasExistingPath, vendors } from '../utils';
+import { createFolder, downloadFile, hasExistingFolder, hasExistingPath } from '../utils';
+import { templates } from '../templates';
 
 const HTTP_CODE_OK = 200;
 const HTTP_CODE_NOT_FOUND = 404;
@@ -15,14 +16,31 @@ export const checkStatusIR = ({ prco, inspectionId }) => {
 
 async function callCheckStatusApi(props) {
   const { prco, inspectionId } = props;
-  const vendor = prco.options.vendor;
+  const { vendor } = prco.options;
+
+  let data;
+  switch (vendor) {
+    case 'verity':
+      data = { api_key: prco.options.api_key, inspection_id: inspectionId };
+      break;
+
+    case 'oneguard':
+      data = { Username: prco.options.username, Password: prco.options.password, request_id: inspectionId };
+      break;
+
+    case 'wis':
+      data = { Username: prco.options.username, Password: prco.options.password, RequestID: inspectionId };
+      break;
+  }
+
+  const { contentType, body } = templates[vendor].check(data);
 
   const axiosOptions = {
     method: 'POST',
     url: prco.options.url,
-    data: vendors[vendor].getBody(prco, inspectionId),
+    data: body,
     headers: {
-      ['Content-Type']: vendors[vendor].contentType,
+      ['Content-Type']: contentType,
     },
   };
 
@@ -217,10 +235,10 @@ function getReportPath(props) {
   return reportFile;
 }
 
-function downloadReport(props) {
+async function downloadReport(props) {
   if (preparedForDownload(props)) {
-    download(props);
-    appendReport(props, `Download completed`);
+    const message = await download(props);
+    appendReport(props, message);
   } else {
     appendReport(props, `Download skipped`);
   }
@@ -290,7 +308,7 @@ function preparedForDownload(props) {
   return isPrepared;
 }
 
-function download(props) {
+async function download(props) {
   const { inspectionId } = props;
   const targetPath = getTargetPath(props);
   const reportFolder = `${targetPath}/${inspectionId}`;
@@ -314,12 +332,7 @@ function download(props) {
   const reportUrl = record?.responseJson[reportProp[vendor]] ?? '';
   const reportPath = getReportPath(props);
 
-  // download pdf report
-  Promise.resolve() //
-    .then(() => {
-      downloadFile(reportUrl, reportPath);
-    })
-    .catch((e) => {
-      appendReport(props, `${e}\n${reportPath}\n`);
-    });
+  const hasDownloaded = await downloadFile(reportUrl, reportPath);
+
+  return hasDownloaded ? 'Download complete' : `Trouble downloading file:\nFrom: ${reportUrl}\nTo: ${reportPath}`;
 }
