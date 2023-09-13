@@ -19,7 +19,7 @@ async function createRequestPlaceholder(prco) {
     return prco;
   }
 
-  prco.inspectionIds = inspectionItems.map((request) => request.split(',')[0] ?? '').sort(sortStringsNumerically);
+  prco.inspectionIds = inspectionItems.map((item) => item.split(',')[0] ?? '').sort(sortStringsNumerically);
 
   prco.inspectionIds.forEach((inspectionId) => {
     const request = inspectionItems.filter((r) => r.startsWith(inspectionId)).join('');

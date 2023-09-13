@@ -92,7 +92,7 @@ function getStatus(props) {
   const isOk = {
     verity: isVendor.verity && responseJson?.code === HTTP_CODE_OK,
     wis: isVendor.wis && !!responseJson?.RequestID,
-    oneguard: isVendor.oneguard && responseJson?.code === HTTP_CODE_OK,
+    oneguard: isVendor.oneguard && !!responseJson?.request_id,
   };
 
   const status = {
@@ -160,10 +160,11 @@ function collectReport(props) {
   const result = {
     verity: json?.result,
     wis: json?.RequestID,
+    oneguard: json?.request_id,
   };
 
   const responseInspectionId = result[vendor];
-  const hasValidInspectionId = !!responseInspectionId && responseInspectionId.toString().length;
+  const hasValidInspectionId = !!responseInspectionId && !!responseInspectionId.toString().length;
 
   let report = '\n\n---\n';
   if (hasValidInspectionId) {
