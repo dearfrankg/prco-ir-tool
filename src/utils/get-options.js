@@ -109,6 +109,12 @@ function prepCreateOperation({ hasInspectionItems, options }) {
 function prepNonCreateOperation({ options }) {
   const inspectionIds = options._.map((id) => id.split(',')[0] ?? '');
 
+  const isWisCancelOperation = options.vendor === 'wis' && options.operation === 'cancel';
+
+  if (isWisCancelOperation) {
+    throw new Error('WIS prefers that you call to cancel inspection request');
+  }
+
   if (inspectionIds.length === 0) {
     throw new Error('Inspection ids are missing');
   }
