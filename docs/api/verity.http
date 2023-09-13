@@ -43,20 +43,18 @@ content-type: application/json
 
 {
   "api_key": "{{$dotenv verity_api_key}}",
-  "inspection_id": 172798
+  "inspection_id": 172961
 }
 
 # RESPONSE
 #
 # {
-#   inspection_id: 172798,
-#   status: "Not Dispatched",
-#   detail_url: "https://dev.verityinspections.com/detail/172798"
-#   images_url: "https://dev.verityinspections.com/images/172798"
-#   report_url: "https://dev.verityinspections.com/pdf-report/172798"
+#   "code": 200,
+#   "inspection_id": 172961,
+#   "status": "Not Dispatched",
+#   "report_url": "https:\/\/verityinspections.s3.amazonaws.com\/inspections\/172961\/12345-172961.pdf",
+#   "details_url": "https:\/\/dev.verityinspections.com\/app\/Customer\/completed-inspections-details_view.php?inspection_id=MTcyOTYx&reference_number=MTIzNDU="
 # }
-
-
 
 
 ###############################################################
@@ -70,5 +68,5 @@ content-type: application/json
 
 {
   "api_key": "{{$dotenv verity_api_key}}",
-  "inspection_id": 172896
+  "inspection_id": 172961
 }

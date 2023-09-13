@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { checkStatusIR } from '.';
+import { createIR, cancelIR, checkStatusIR } from '.';
 import { sortStringsNumerically } from '../utils';
 
 export const process = (options) => {
@@ -35,18 +35,23 @@ async function createRequestPlaceholder(prco) {
 
 async function executeOperations(prco) {
   const operation = prco.options.operation;
+  const isCreateOperation = operation === 'create';
 
-  const promises = Object.keys(prco.responses).map((inspectionId) => {
-    if (operation === 'check-status') {
-      return checkStatusIR({ prco, inspectionId });
-    }
+  if (isCreateOperation) {
+    await createIR(prco);
+  } else {
+    const promises = Object.keys(prco.responses).map((inspectionId) => {
+      if (operation === 'check-status') {
+        return checkStatusIR({ prco, inspectionId });
+      }
 
-    // if (operation === 'cancel') {
-    //   return cancelIR({ prco, inspectionId });
-    // }
-  });
+      if (operation === 'cancel') {
+        return cancelIR({ prco, inspectionId });
+      }
+    });
 
-  await Promise.all(promises);
+    await Promise.all(promises);
+  }
 
   return prco;
 }

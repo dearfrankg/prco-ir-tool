@@ -1,8 +1,7 @@
 
-
+###########################################################################
 ### CREATE-IR
-# create inspection request
-POST https://www.stage.wisinspections.com/wiswebservice.asmx?WSDL HTTP/1.1
+POST {{$dotenv wis_test_url}} HTTP/1.1
 content-type: text/xml; charset=utf-8;
 
 <soap:Envelope
@@ -58,10 +57,15 @@ content-type: text/xml; charset=utf-8;
 
 
 
+
+
+
+
+###########################################################################
 ### CHECK-STATUS-IR
 # check status on inspection request
 
-POST https://www.stage.wisinspections.com/wiswebservice.asmx?WSDL HTTP/1.1
+POST {{$dotenv wis_test_url}} HTTP/1.1
 content-type: text/xml; charset=utf-8
 
 <soap:Envelope
@@ -76,15 +80,12 @@ content-type: text/xml; charset=utf-8
   </soap:Header>
   <soap:Body>
     <CheckStatus xmlns="http://www.wisinspections.com/">
-      <RequestID>1035877</RequestID>
+      <RequestID>1048453</RequestID>
     </CheckStatus>
   </soap:Body>
 </soap:Envelope>
 
-
-# RESPONSE
-
-# when id found
+# SUCCESS
 #
 # <diffgr:diffgram
 #   xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
@@ -99,21 +100,25 @@ content-type: text/xml; charset=utf-8
 #     </tblInspectionRequest>
 #   </NewDataSet>
 # </diffgr:diffgram>
-
-# when id not found
+#
+# NOT FOUND
 #
 # <diffgr:diffgram
 #   xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
 #   xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram />
 
 
+
+
+
+###########################################################################
 ### CANCEL-IR
-# cancel inspection request
-# they prefer you reach out to them instead of api
+#
+### they prefer you reach out to them instead of api
 
 
 ### TRY
-POST https://www.stage.wisinspections.com/wiswebservice.asmx?WSDL HTTP/1.1
+POST {{$dotenv wis_test_url}} HTTP/1.1
 content-type: text/xml; charset=utf-8
 
 <soap:Envelope
@@ -128,7 +133,7 @@ content-type: text/xml; charset=utf-8
   </soap:Header>
   <soap:Body>
     <CheckStatus xmlns="http://www.wisinspections.com/">
-      <RequestID>1048435</RequestID>
+      <RequestID>1048453</RequestID>
     </CheckStatus>
   </soap:Body>
 </soap:Envelope>

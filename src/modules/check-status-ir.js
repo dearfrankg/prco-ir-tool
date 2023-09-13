@@ -49,16 +49,8 @@ async function callCheckStatusApi(props) {
 }
 
 async function processResponse(props) {
-  const { prco, inspectionId } = props;
-  const record = prco.responses[inspectionId] ?? { responseJson: '' };
-  record.responseJson = collectJson(props);
-
-  const code = prco.responses[inspectionId]?.responseStatus;
-  const status = {
-    ok: code === HTTP_CODE_OK,
-    not_found: code === HTTP_CODE_NOT_FOUND || !record?.responseJson?.success,
-    missing_data: record.responseJson === null,
-  };
+  const { inspectionId } = props;
+  const status = getStatus(props);
 
   if (status.not_found) {
     appendReport(props, `\n---\nInspection id ${inspectionId} not found\n`);
@@ -67,7 +59,7 @@ async function processResponse(props) {
     return props;
   }
 
-  if (status.ok && status.missing_data) {
+  if (status.missing_data) {
     appendReport(props, `\n---\nInspection id ${inspectionId} missing data\n`);
   }
 
@@ -80,12 +72,41 @@ async function processResponse(props) {
   return props;
 }
 
+function getStatus(props) {
+  const { prco, inspectionId } = props;
+  const record = prco.responses[inspectionId];
+  record.responseJson = collectJson(props);
+  const { responseStatus, responseJson } = record;
+  const vendor = prco.options.vendor;
+
+  const isVendor = {
+    wis: vendor === 'wis',
+    oneguard: vendor === 'oneguard',
+    verity: vendor === 'verity',
+  };
+
+  const isOk = {
+    verity: isVendor.verity && responseStatus === HTTP_CODE_OK,
+    wis: isVendor.wis && responseStatus === HTTP_CODE_OK && !!responseJson?.RequestID,
+    oneguard: isVendor.oneguard && !!responseJson?.request_id,
+  };
+
+  const status = {
+    ok: responseStatus === HTTP_CODE_OK && isOk[vendor],
+    not_found: responseStatus === HTTP_CODE_NOT_FOUND,
+    missing_data: responseJson === null,
+  };
+
+  return status;
+}
+
 function collectJson(props) {
   const { prco, inspectionId } = props;
+  const record = prco.responses[inspectionId];
 
   const vendor = prco.options.vendor;
   if (vendor === 'verity') {
-    return {};
+    return record.responseData;
   }
 
   const getJsonPath = () => {
@@ -97,8 +118,6 @@ function collectJson(props) {
 
     return prefix;
   };
-
-  const record = prco.responses[inspectionId] ?? { responseData: '' };
 
   // xml 2 json
   const parser = new XMLParser();
@@ -120,39 +139,52 @@ function collectJson(props) {
 
 function collectReport(props) {
   const { prco, inspectionId } = props;
-  const record = prco.responses[inspectionId] ?? { responseJson: '' };
+  const record = prco.responses[inspectionId];
   const json = record.responseJson;
+  const vendor = prco.options.vendor;
 
-  const isWisReport = prco.options.vendor === 'wis';
+  const isWisReport = vendor === 'wis';
   const missingJson = !json || json === null || (!isWisReport && !json.status);
 
   if (missingJson) {
     return '';
   }
 
-  const genWisReport = () => {
-    const report = `
-inspection_id: ${json.RequestId}
+  const reportFormats = {
+    wis: () => {
+      const report = `
+inspection_id: ${json.RequestID}
 details: ${json.Details}
 images: ${json.Images}
 report_pdf: ${json.Report}`;
 
-    return report.slice(1);
-  };
+      return report.slice(1);
+    },
 
-  const genOneguardReport = () => {
-    const report = `
+    oneguard: () => {
+      const report = `
 inspection_id: ${inspectionId}
 status: ${json.status}
 state: ${json.state}
 message: ${json.message}
 report_pdf: ${json.report_pdf}`;
 
-    return report.slice(1);
+      return report.slice(1);
+    },
+
+    verity: () => {
+      const report = `
+inspection_id: ${inspectionId}
+status: ${json.status}
+details: ${json.details_url}
+report_pdf: ${json.report_url}`;
+
+      return report.slice(1);
+    },
   };
 
   let report = '\n\n---\n';
-  report = report.concat(isWisReport ? genWisReport() : genOneguardReport());
+  report += reportFormats[vendor]();
   report += `\n`;
 
   return report;
@@ -195,16 +227,11 @@ function downloadReport(props) {
 }
 
 function preparedForDownload(props) {
-  const { requestId } = props;
-  const record = props.prco.responses[requestId];
-  const vendor = props.prco.options.vendor;
+  const { prco, inspectionId } = props;
+  const record = prco.responses[inspectionId];
+  const vendor = prco.options.vendor;
 
-  const code = props.prco.responses[requestId]?.responseStatus;
-  const status = {
-    ok: code === HTTP_CODE_OK,
-    not_found: code === HTTP_CODE_NOT_FOUND,
-    missing_data: record?.responseJson === null,
-  };
+  const status = getStatus(props);
 
   if (status.not_found || status.missing_data) {
     return false;
@@ -218,7 +245,7 @@ function preparedForDownload(props) {
     };
     const vendorKey = suffix[vendor];
     const url = record?.responseJson[vendorKey];
-    const hasReportUrl = !!url;
+    const hasReportUrl = !!url && url.startsWith('http');
 
     if (hasReportUrl) {
       return true;

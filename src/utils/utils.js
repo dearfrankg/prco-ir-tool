@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 import fs from 'fs';
-import path from 'path';
 
 export const sortStringsNumerically = (a, b) => {
   return a.localeCompare(b);
@@ -30,7 +29,7 @@ export const createFolder = (folderPath) => {
   }
 
   if (!isFolderPath) {
-    fs.mkdirSync(path);
+    fs.mkdirSync(folderPath);
   }
 };
 

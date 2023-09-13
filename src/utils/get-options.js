@@ -315,7 +315,7 @@ function getVendorsEnvResources() {
 
         // derive url
         const suffix = {
-          create: '/create-inspection',
+          create: '/submit-inspection',
           ['check-status']: '/check-inspection',
           cancel: '/cancel-inspection',
         };
