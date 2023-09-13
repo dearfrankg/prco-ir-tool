@@ -1,6 +1,6 @@
 {
   "name": "@cogent-labs/prco-ir-tool",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.ts",
   "type": "module",
