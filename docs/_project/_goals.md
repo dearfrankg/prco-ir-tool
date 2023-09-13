@@ -27,3 +27,5 @@
 - done: oneguard create
 - done: oneguard check -- done: download
 - done: oneguard cancel
+
+> verity api missing fields - read docs
