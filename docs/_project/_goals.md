@@ -10,11 +10,11 @@
 
 ## FEATURES
 
-| vendor   | create-ir |           check-ir           |               cancel-ir               |
-| -------- | :-------: | :--------------------------: | :-----------------------------------: |
-| verity   |     √     | status: √ -- download: issue |                   √                   |
-| wis      |     √     |              √               | message: "no support. call to cancel" |
-| oneguard |     √     |              √               |                   √                   |
+| vendor   | create-ir |           check-ir           |                 cancel-ir                 |
+| -------- | :-------: | :--------------------------: | :---------------------------------------: |
+| verity   |     √     | status: √ -- download: issue |                     √                     |
+| wis      |     √     |              √               | message: "WIS prefers you call to cancel" |
+| oneguard |     √     |              √               |                     √                     |
 
 ## TEST SCRIPT
 
@@ -23,7 +23,7 @@
 - done: verity cancel
 - done: wis create
 - done: wis check -- done: download
-- done: wis cancel
+- done: wis cancel -- done: message: WIS prefers you call to cancel
 - done: oneguard create
 - done: oneguard check -- done: download
 - done: oneguard cancel
