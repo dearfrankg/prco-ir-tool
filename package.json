@@ -1,9 +1,8 @@
 {
   "name": "@cogent-labs/prco-ir-tool",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "index.ts",
-  "type": "module",
   "bin": {
     "prco-ir-tool": "./src/bin/prco-ir-tool.js"
   },
@@ -36,9 +35,8 @@
     "axios": "^1.5.0",
     "dotenv": "^16.3.1",
     "fast-xml-parser": "^4.2.7",
-    "lodash-es": "^4.17.21",
+    "lodash": "^4.17.21",
     "minimist": "^1.2.8",
-    "tsx": "^3.12.10",
     "zod": "^3.22.2"
   }
 }

@@ -1,4 +1,4 @@
-export const usage = `
+const usage = `
         NAME
 
             prco-ir-tool AKA prco inspection request tool
@@ -44,3 +44,7 @@ export const usage = `
 
 
 `;
+
+module.exports = {
+  usage,
+};

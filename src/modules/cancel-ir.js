@@ -1,12 +1,12 @@
-import axios from 'axios';
-import { XMLParser } from 'fast-xml-parser';
-import { get } from 'lodash-es';
-import { templates } from '../templates';
+const axios = require('axios');
+const { XMLParser } = require('fast-xml-parser');
+const get = require('lodash/get');
+const { templates } = require('../templates');
 
 const HTTP_CODE_OK = 200;
 const HTTP_CODE_NOT_FOUND = 404;
 
-export const cancelIR = (props) => {
+const cancelIR = (props) => {
   return Promise.resolve(props) //
     .then(callCancelApi)
     .then(processResponse);
@@ -191,3 +191,7 @@ function collectReport(props) {
 
   return report;
 }
+
+module.exports = {
+  cancelIR,
+};

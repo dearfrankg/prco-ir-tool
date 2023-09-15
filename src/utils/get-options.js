@@ -1,14 +1,15 @@
 /* eslint-disable no-console */
 
-import parseArgs from 'minimist';
-import * as schema from '../schemas';
-import { usage, isUnique, hasExistingPath, hasExistingFolder } from '../utils';
-import { config } from 'dotenv';
-import { templateSchemas } from '../schemas';
+const parseArgs = require('minimist');
+const schema = require('../schemas');
+const { isUnique, hasExistingPath, hasExistingFolder } = require('../utils/utils');
+const { usage } = require('../utils/usage');
+const { config } = require('dotenv');
+const { templateSchemas } = require('../schemas');
 
 const vendors = getVendorsEnvResources();
 
-export function getOptions() {
+function getOptions() {
   return Promise.resolve() //
     .then(collectMinimistOptions)
     .then(collectEnvOptions)
@@ -356,3 +357,7 @@ function getVendorsEnvResources() {
 //   console.log('options: ', options);
 //   return options;
 // }
+
+module.exports = {
+  getOptions,
+};

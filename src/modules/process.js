@@ -1,8 +1,10 @@
 /* eslint-disable no-console */
-import { createIR, cancelIR, checkStatusIR } from '.';
-import { sortStringsNumerically } from '../utils';
+const { createIR } = require('./create-ir');
+const { cancelIR } = require('./cancel-ir');
+const { checkStatusIR } = require('./check-status-ir');
+const { sortStringsNumerically } = require('../utils/utils');
 
-export const process = (options) => {
+const process = (options) => {
   return Promise.resolve(options) //
     .then(printStartBanner)
     .then(createRequestPlaceholder)
@@ -99,3 +101,7 @@ function printReport(prco) {
 function printFinishBanner() {
   console.log(`\n\nFinished process\n\n`);
 }
+
+module.exports = {
+  process,
+};

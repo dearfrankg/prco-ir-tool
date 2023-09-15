@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   preset: '',
   testEnvironment: 'node',
   moduleNameMapper: {

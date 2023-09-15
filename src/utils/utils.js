@@ -1,26 +1,26 @@
 /* eslint-disable no-console */
-import axios from 'axios';
-import fs from 'fs';
+const axios = require('axios');
+const fs = require('fs');
 
-export const sortStringsNumerically = (a, b) => {
+const sortStringsNumerically = (a, b) => {
   return a.localeCompare(b);
 };
 
-export const isUnique = (arr) => {
+const isUnique = (arr) => {
   const unique = new Set(arr);
   return unique.size === arr.length;
 };
 
-export const hasExistingPath = (path) => {
+const hasExistingPath = (path) => {
   return fs.existsSync(path);
 };
 
-export const hasExistingFolder = (folderPath) => {
+const hasExistingFolder = (folderPath) => {
   const stats = fs.statSync(folderPath);
   return stats.isDirectory();
 };
 
-export const createFolder = (folderPath) => {
+const createFolder = (folderPath) => {
   const isFilePath = hasExistingPath(folderPath) && !hasExistingFolder(folderPath);
   const isFolderPath = hasExistingPath(folderPath) && hasExistingFolder(folderPath);
 
@@ -33,7 +33,7 @@ export const createFolder = (folderPath) => {
   }
 };
 
-export const downloadFile = (reportUrl, reportPath) => {
+const downloadFile = (reportUrl, reportPath) => {
   return axios({
     method: 'get',
     url: reportUrl,
@@ -46,4 +46,13 @@ export const downloadFile = (reportUrl, reportPath) => {
     .catch(() => {
       return false;
     });
+};
+
+module.exports = {
+  sortStringsNumerically,
+  isUnique,
+  hasExistingPath,
+  hasExistingFolder,
+  createFolder,
+  downloadFile,
 };

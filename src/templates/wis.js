@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import { templateSchemas } from '../schemas';
+const { templateSchemas } = require('../schemas');
 
-export const wisTemplates = {
+const wisTemplates = {
   create: (data) => {
     const result = templateSchemas.wis.create.safeParse(data);
     if (!result.success) {
@@ -113,4 +113,8 @@ ${InspectionReasons}
 </soap:Envelope>`,
     };
   },
+};
+
+module.exports = {
+  wisTemplates,
 };

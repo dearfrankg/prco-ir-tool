@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import { templateSchemas } from '../schemas';
+const { templateSchemas } = require('../schemas');
 
-export const oneguardTemplates = {
+const oneguardTemplates = {
   create: (data) => {
     const result = templateSchemas.oneguard.create.safeParse(data);
     if (!result.success) {
@@ -119,4 +119,8 @@ ${inspectionReasons}
 </SOAP-ENV:Envelope>`.replace(/\n/g, ''),
     };
   },
+};
+
+module.exports = {
+  oneguardTemplates,
 };

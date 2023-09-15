@@ -1,8 +1,8 @@
-#!/usr/bin/env tsx
+#!/usr/bin/env node
 /* eslint-disable no-console */
 
-import { getOptions } from '../utils';
-import { process } from '../modules';
+const { getOptions } = require('../utils/get-options');
+const { process } = require('../modules/process');
 
 const prcoIRTool = async () => {
   Promise.resolve()

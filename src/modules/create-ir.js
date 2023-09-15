@@ -1,12 +1,12 @@
-import axios from 'axios';
-import { get } from 'lodash-es';
-import { templates } from '../templates';
-import { XMLParser } from 'fast-xml-parser';
+const axios = require('axios');
+const get = require('lodash/get');
+const { templates } = require('../templates');
+const { XMLParser } = require('fast-xml-parser');
 
 const HTTP_CODE_OK = 200;
 const HTTP_CODE_NOT_FOUND = 404;
 
-export const createIR = (props) => {
+const createIR = (props) => {
   return Promise.resolve(props) //
     .then(callCreateApi)
     .then(processResponse);
@@ -165,3 +165,7 @@ function collectReport(prco) {
 
   return report;
 }
+
+module.exports = {
+  createIR,
+};

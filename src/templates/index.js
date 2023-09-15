@@ -1,9 +1,13 @@
-import { wisTemplates } from './wis';
-import { oneguardTemplates } from './oneguard';
-import { verityTemplates } from './verity';
+const { wisTemplates } = require('./wis');
+const { oneguardTemplates } = require('./oneguard');
+const { verityTemplates } = require('./verity');
 
-export const templates = {
+const templates = {
   wis: wisTemplates,
   oneguard: oneguardTemplates,
   verity: verityTemplates,
+};
+
+module.exports = {
+  templates,
 };

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import { templateSchemas } from '../schemas';
+const { templateSchemas } = require('../schemas');
 
-export const verityTemplates = {
+const verityTemplates = {
   create: (data) => {
     const result = templateSchemas.verity.create.safeParse(data);
     if (!result.success) {
@@ -37,4 +37,8 @@ export const verityTemplates = {
       body: JSON.stringify(data),
     };
   },
+};
+
+module.exports = {
+  verityTemplates,
 };

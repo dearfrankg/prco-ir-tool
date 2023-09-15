@@ -1,6 +1,6 @@
-import { z } from 'zod';
+const { z } = require('zod');
 
-export function shape(schema) {
+function shape(schema) {
   const shape = {};
 
   for (const key in schema.shape) {
@@ -25,7 +25,7 @@ const regexp = {
   inspectionItems: /^\d+(?:,\/(?:([a-z]+\/)+[a-z]+)?)?$/,
 };
 
-export const BaseOptionsSchema = z.object({
+const BaseOptionsSchema = z.object({
   config_env_file: z.string(),
   operation: z.enum(['check-status', 'cancel', 'create']),
   vendor: z.enum(['wis', 'oneguard', 'verity']),
@@ -33,7 +33,7 @@ export const BaseOptionsSchema = z.object({
   inspectionItems: z.array(z.string().regex(regexp.inspectionItems, { message: 'invalid inspection item' })),
 });
 
-export const CreateOptionsSchema = BaseOptionsSchema.omit({ inspectionItems: true }).merge(
+const CreateOptionsSchema = BaseOptionsSchema.omit({ inspectionItems: true }).merge(
   z.object({ json: z.string(), jsonObj: z.any().optional() }),
 );
 
@@ -58,7 +58,7 @@ const VerityEnvSchema = z.object({
   verity_report_folder: z.string(),
 });
 
-export const EnvSchema = z.union([WisEnvSchema, OneguardEnvSchema, VerityEnvSchema]);
+const EnvSchema = z.union([WisEnvSchema, OneguardEnvSchema, VerityEnvSchema]);
 
 const NonVerityOptionsSchema = z.object({
   username: z.string(),
@@ -73,12 +73,12 @@ const VerityOptionsSchema = z.object({
   report_folder: z.string(),
 });
 
-export const VerityBaseOptionsSchema = BaseOptionsSchema.merge(VerityOptionsSchema);
-export const VerityCreateOptionsSchema = CreateOptionsSchema.merge(VerityOptionsSchema);
-export const NonVerityBaseOptionsSchema = BaseOptionsSchema.merge(NonVerityOptionsSchema);
-export const NonVerityCreateOptionsSchema = CreateOptionsSchema.merge(NonVerityOptionsSchema);
+const VerityBaseOptionsSchema = BaseOptionsSchema.merge(VerityOptionsSchema);
+const VerityCreateOptionsSchema = CreateOptionsSchema.merge(VerityOptionsSchema);
+const NonVerityBaseOptionsSchema = BaseOptionsSchema.merge(NonVerityOptionsSchema);
+const NonVerityCreateOptionsSchema = CreateOptionsSchema.merge(NonVerityOptionsSchema);
 
-export const templateSchemas = {
+const templateSchemas = {
   oneguard: {
     create: z.object({
       UserName: z.string(),
@@ -201,4 +201,16 @@ export const templateSchemas = {
       RequestID: z.string(),
     }),
   },
+};
+
+module.exports = {
+  shape,
+  BaseOptionsSchema,
+  CreateOptionsSchema,
+  EnvSchema,
+  VerityBaseOptionsSchema,
+  VerityCreateOptionsSchema,
+  NonVerityBaseOptionsSchema,
+  NonVerityCreateOptionsSchema,
+  templateSchemas,
 };

@@ -1,13 +1,13 @@
-import axios from 'axios';
-import { XMLParser } from 'fast-xml-parser';
-import { get } from 'lodash-es';
-import { createFolder, downloadFile, hasExistingFolder, hasExistingPath } from '../utils';
-import { templates } from '../templates';
+const axios = require('axios');
+const { XMLParser } = require('fast-xml-parser');
+const get = require('lodash/get');
+const { createFolder, downloadFile, hasExistingFolder, hasExistingPath } = require('../utils/utils');
+const { templates } = require('../templates');
 
 const HTTP_CODE_OK = 200;
 const HTTP_CODE_NOT_FOUND = 404;
 
-export const checkStatusIR = ({ prco, inspectionId }) => {
+const checkStatusIR = ({ prco, inspectionId }) => {
   return Promise.resolve({ prco, inspectionId }) //
     .then(callCheckStatusApi)
     .then(processResponse)
@@ -336,3 +336,7 @@ async function download(props) {
 
   return hasDownloaded ? 'Download complete' : `Trouble downloading file:\nFrom: ${reportUrl}\nTo: ${reportPath}`;
 }
+
+module.exports = {
+  checkStatusIR,
+};
