@@ -48,11 +48,14 @@ function collectMinimistOptions() {
     process.exit(1);
   }
 
+  const hasNoOperation = !options.operation || options.operation.includes(['create', 'check-status', 'cancel']);
   const isCreateOperation = options.operation === 'create';
   const hasInspectionItems = options._.length > 0;
   let result;
 
-  if (isCreateOperation) {
+  if (hasNoOperation) {
+    throw new Error('Missing valid operation');
+  } else if (isCreateOperation) {
     prepCreateOperation({ hasInspectionItems, options });
     result = schema.CreateOptionsSchema.safeParse(options);
   } else {
