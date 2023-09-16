@@ -6,6 +6,7 @@
 | verity   | alex Kuzmenok            | 732-654-2184 -- 732.654.0004 | Alex Kuzmenok <alex@incore.com>              |
 | oneguard | Bryan Behrends (RETIRED) | 970.227.5243                 | Bryan Behrends <bryan@zapus.co>              |
 | oneguard | Kasey Kimmel             |                              | Kasey Kimmel <kasey@oneguardinspections.com> |
+| oneguard | Jose Janolo              |                              | Jose Janolo <jose.janolo@repairondemand.com> |
 | wis      | Arlene Will              |                              | Arlene Will <arlene_will@wisinspections.com> |
 | wis      | Stacey Peery - proj mgr  | 800-981-7358 ext 2321        | Stacey Peery <staceyp@ckautoparts.com>       |
 |          |                          |                              |                                              |
