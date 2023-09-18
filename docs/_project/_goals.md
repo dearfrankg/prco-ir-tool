@@ -4,9 +4,8 @@
 
 ## HOW 4D WORKS
 
-- event loop
-- on createIR event - then call api with sendRequestC format
-- on cron call check-status
+- cron call check-status
+- all api calls happen via prco-ir-tool
 
 ## FEATURES
 
@@ -27,5 +26,3 @@
 - done: oneguard create
 - done: oneguard check -- done: download
 - done: oneguard cancel
-
-> verity api missing fields - read docs
