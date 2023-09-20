@@ -148,9 +148,9 @@ const templateSchemas = {
       req_email: z.string(),
       failures: z.array(
         z.object({
-          cause: z.string().required(),
-          complaint: z.string().required(),
-          correction: z.string().required(),
+          cause: z.string(),
+          complaint: z.string(),
+          correction: z.string(),
         }),
       ),
     }),
