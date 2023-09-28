@@ -87,7 +87,7 @@ const templateSchemas = {
       RequesterExt: z.string().max(10).optional(),
       RequesterEmail: z.string().max(100).optional(),
       ContractHolder: z.string().max(91).optional(),
-      SaleDate: z.date(),
+      SaleDate: z.coerce.date(),
       SaleOdometer: z.string().max(10).optional(),
       VehicleYear: z.string().max(4),
       VehicleMake: z.string().max(25),
