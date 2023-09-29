@@ -1,13 +1,17 @@
 # Goals
 
-- get create IR working for verity
+Provide a command that allows you to use the following APIs:
+
+- create inspection request
+- check status of inspection request
+- cancel inspection request
 
 ## HOW 4D WORKS
 
-- cron call check-status
-- all api calls happen via prco-ir-tool
+- 4d calls prco-ir-tool for all api requests
+- 4d has a cron job that calls the check-status api on occasion
 
-## FEATURES
+## prco-ir-tool FEATURES
 
 | vendor   | create-ir |           check-ir           |                 cancel-ir                 |
 | -------- | :-------: | :--------------------------: | :---------------------------------------: |
@@ -15,14 +19,21 @@
 | wis      |     √     |              √               | message: "WIS prefers you call to cancel" |
 | oneguard |     √     |              √               |                     √                     |
 
-## TEST SCRIPT
+## ISSUES
 
-- done: verity create
-- done: verity check -- issue with downloading pdf
-- done: verity cancel
-- done: wis create
-- done: wis check -- done: download
-- done: wis cancel -- done: message: WIS prefers you call to cancel
-- done: oneguard create
-- done: oneguard check -- done: download
-- done: oneguard cancel
+- verity download has issues
+
+## PRODUCT SIGN-OFF
+
+| feature                             | sign-off |
+| ----------------------------------- | -------- |
+| install documentation               |          |
+| api documentation                   |          |
+| api testing tool                    |          |
+| prco-ir-tool test environment       |          |
+| prco-ir-tool production environment |          |
+| 4d to prco-ir-tool test             |          |
+| download to google drive test       |          |
+|                                     |          |
+|                                     |          |
+|                                     |          |

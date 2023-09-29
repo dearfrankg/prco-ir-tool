@@ -2,9 +2,7 @@
 
 ## What tech do we use on this project
 
-tsx
-
-- tsx is a node/ts-node replacement -- allows you to easily use .ts, .js and esm
+- node
 
 ## dev environment
 
@@ -20,3 +18,12 @@ tsx
 - pnpm - speedy package manager
 - npm - you can use this to install the package
 - npm registry -- an online repo for storing your package for distribution
+
+## packages
+
+- axios -- rest
+- dotenv -- env vars
+- fast-xml-parser -- parse xml
+- lodash -- get utility
+- minimist -- CLI options management
+- zod -- schema validation
