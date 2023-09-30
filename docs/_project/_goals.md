@@ -25,15 +25,15 @@ Provide a command that allows you to use the following APIs:
 
 ## PRODUCT SIGN-OFF
 
-| feature                             | sign-off |
-| ----------------------------------- | -------- |
-| install documentation               |          |
-| api documentation                   |          |
-| api testing tool                    |          |
-| prco-ir-tool test environment       |          |
-| prco-ir-tool production environment |          |
-| 4d to prco-ir-tool test             |          |
-| download to google drive test       |          |
-|                                     |          |
-|                                     |          |
-|                                     |          |
+| feature                             | complete | sign-off |
+| ----------------------------------- | :------: | -------- |
+| install documentation               |    √     |          |
+| api documentation                   |    √     |          |
+| api testing tool                    |    √     |          |
+| prco-ir-tool test environment       |    √     |          |
+| prco-ir-tool production environment |    √     |          |
+| 4d to prco-ir-tool test             |    √     |          |
+| download to google drive test       |    √     |          |
+|                                     |          |          |
+|                                     |          |          |
+|                                     |          |          |
